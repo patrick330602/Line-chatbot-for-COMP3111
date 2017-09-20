@@ -74,4 +74,17 @@ public class KitchenSinkTester {
 		assertThat(!thrown);
 		assertThat(result.equals("def"));
 	}
+	
+	@Test
+	public void testCase() throws Exception {
+		boolean thrown = false;
+		String result = null;
+		try {
+			result = this.databaseEngine.search("hOw Is tHE grAde oF tHIs CoURse?");
+		} catch (Exception e) {
+			thrown = true;
+		}
+		assertThat(!thrown);
+		assertThat(result.equals("This is absolute good grade for good student. And I am sure you are!"));
+	}
 }

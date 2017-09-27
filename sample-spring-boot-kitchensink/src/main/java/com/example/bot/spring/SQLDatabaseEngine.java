@@ -20,18 +20,18 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 		ResultSet rs = stmt.executeQuery();
 		
 		try {
-			
-			String sCurrentLine;
+			result = text;
 			while (rs.next()) {
-				sCurrentLine = rs.getString(1) + ":" +  rs.getString(2);
-				String[] parts = sCurrentLine.split(":");
-				
-				if (text.toLowerCase().equals(parts[0].toLowerCase())) {
-					result = parts[1];
+				if (text.toLowerCase().equals(rs.getString(1).toLowerCase())) {
+					result = rs.getString(2);
 				}
 			}
 		}catch (Exception e) {
 			log.info("Exception while reading database: {}", e.toString());
+		}finally {
+			rs.close();
+			stmt.close();
+			connection.close();
 		}
 		if (result != null)
 			return result;
